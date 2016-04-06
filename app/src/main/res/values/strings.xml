@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">NewProj</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">WepApp</string>
+    <string name="return_botton">Return</string>
+    <string name="set_url">Set Url</string>
+    <string name="refresh_1">refresh</string>
+
 </resources>
