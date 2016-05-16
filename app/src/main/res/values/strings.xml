@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">WepApp</string>
     <string name="return_botton">Return</string>
-    <string name="set_url">Set Url</string>
+    <string name="set_url">SET URL</string>
     <string name="refresh_1">refresh</string>
     <string name="save">save</string>
     <string name="humidity">Humidity</string>
@@ -11,5 +11,11 @@
     <string name="clear2">ClEAR</string>
     <string name="return2">return</string>
     <string name="check_data">Check Data</string>
+    <string name="polaczenie">Connection</string>
+    <string name="o_programie">Version</string>
+    <string name="connect">connect</string>
+    <string name="memory">Memory</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 
 </resources>

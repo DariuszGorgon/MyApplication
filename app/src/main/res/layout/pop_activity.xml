@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/popup"
+    android:orientation="vertical"
+    >
+    >
+
+    <EditText
+        android:layout_margin="20dp"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:background="@drawable/edit_text"
+        android:id="@+id/newurl"
+        android:text="http://192.168.8.103/weather"
+        android:inputType="textWebEditText"
+        android:clickable="false"
+        android:shadowColor="#789cea"
+        android:textColorLink="#000000"
+        android:textColorHighlight="#000000"
+        android:contextClickable="true"
+        android:enabled="true"
+        android:foreground="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"></EditText>
+    <Button
+
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+
+        android:background="@drawable/buttonshape"
+        android:id="@+id/setnewurl"
+        android:onClick="setnewURL"
+        android:text="@string/set_url"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

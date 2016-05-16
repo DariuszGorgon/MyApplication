@@ -7,18 +7,22 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ConnectActivity extends AppCompatActivity {
-    EditText urlEditText;
+
+    //dddd
     public static String url;
     SharedPreferences sheredpreferences;
     SharedPreferences.Editor editor;
     Animation animRotate;
-    Animation animTranslate;
+    Animation animhide;
     static Thread threads;
     private static Context context;
     @Override
@@ -32,15 +36,11 @@ public class ConnectActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        urlEditText=(EditText) findViewById(R.id.url);
-
-
         sheredpreferences = getSharedPreferences("com.example.hamlet.newproj", Context.MODE_PRIVATE);
         editor = sheredpreferences.edit();
-        urlEditText.setText(sheredpreferences.getString("Last_URL","http://192.168.4.1/weather"));
         context = getApplicationContext();
         animRotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        animTranslate = AnimationUtils.loadAnimation(this, R.anim.translate);
+        animhide = AnimationUtils.loadAnimation(this, R.anim.hide);
         threads = new Thread(startNewActivity, "nieWiemPoCoTenArgument");
 
     }
@@ -52,12 +52,9 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     public void setURL(View view) {
-        urlEditText.startAnimation(animTranslate);
-        view.startAnimation(animRotate);
-        url=urlEditText.getText().toString();
+        view.startAnimation(animhide);
+        url=sheredpreferences.getString("Last_URL","http://192.168.4.1/weather");
         threads.start();
-        editor.putString("Last_URL", url);
-        editor.commit();
     }
 
     private Runnable startNewActivity = new Runnable() {
@@ -65,9 +62,9 @@ public class ConnectActivity extends AppCompatActivity {
         public void run() {
 
                 try {
-                    Intent intent= new Intent(ConnectActivity.context, WepViewActivity.class);
-                    Thread.sleep(150);
 
+                    Thread.sleep(150);
+                    Intent intent= new Intent(ConnectActivity.context, WepViewActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -79,5 +76,22 @@ public class ConnectActivity extends AppCompatActivity {
             }
 
     };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_action_bar, menu);//podmiana xmp na jave
+        return super.onCreateOptionsMenu(menu);
+
+
+    }
+
+    public void onPalaczenieClick(MenuItem item) {
+        startActivity(new Intent(this,Pop.class));
+
+    }
+
+    public void onProgramieClick(MenuItem item) {
+
+        Toast.makeText(this,"Created by: Kamil Kolmus,Darek Gorgoń \nVersion: 1.2", Toast.LENGTH_SHORT).show();
+    }
 }
 //shhsh

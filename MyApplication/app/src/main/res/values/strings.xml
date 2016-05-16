@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WepApp</string>
+    <string name="return_botton">Return</string>
+    <string name="set_url">Set Url</string>
+    <string name="refresh_1">refresh</string>
+    <string name="save">save</string>
+    <string name="humidity">Humidity</string>
+    <string name="light">Light</string>
+    <string name="pressure">Pressure</string>
+    <string name="clear">CLEAR</string>
+    <string name="clear2">ClEAR</string>
+    <string name="return2">return</string>
+    <string name="check_data">Check Data</string>
+
+</resources>

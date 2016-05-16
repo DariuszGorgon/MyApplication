@@ -9,15 +9,19 @@ import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class WepViewActivity extends AppCompatActivity {
@@ -73,45 +77,38 @@ public class WepViewActivity extends AppCompatActivity {
         isRunning = true;
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
         isRunning = false;
 
-    }
-
-    public void returnButton(View view) {
-        view.startAnimation(animRotate);
-        Thread thread1 = new Thread() {
-            @Override
-            public void run() {
-                try {
-
-                        sleep(150);
-                        Intent intent = new Intent(WepViewActivity.context, ConnectActivity.class);
-                        startActivity(intent);
-                        finish();
-
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        thread1.start();
+    }@Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,ConnectActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void saveButton(View view) {
+
+
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss     yyyy-MM-dd");
+        String currentDateandTime = sdf.format(new Date());
+
         view.startAnimation(animHide);
         File file = new File(path + "/weather.txt");
         String[] s = new String[1];
-        s[0] = "TEMPERATURE = " + WepViewActivity.temperature + " °C  PRESSURE = " + WepViewActivity.pressure + " hPa  LIGHT = " + WepViewActivity.light + " lx  HUMIDITY = " + WepViewActivity.humidity + " %";
+        s[0] = "TEMPERATURE = " + WepViewActivity.temperature  + " °C   HUMIDITY = " + WepViewActivity.humidity + " %   LIGHT = "+
+                WepViewActivity.light+ " lx   PRESSURE = " + WepViewActivity.pressure + " hPa                   "+
+        currentDateandTime+"";
         MyFileClass.AddNewDataToLoadedFile2(file, s[0]);
-
-
     }
     public void onCheckDataCLICK(View view) {
-        view.startAnimation(animRotate);
+        view.startAnimation(animHide);
         Thread thread1 = new Thread() {
             @Override
             public void run() {
@@ -135,6 +132,11 @@ public class WepViewActivity extends AppCompatActivity {
         File file = new File(path + "/weather.txt");
         MyFileClass.ClearFile(file);
     }
+    public void onProgramieClick(MenuItem item) {
+
+        Toast.makeText(this,"Autorzy:Kamil Kolmus,Darek Gorgoń \nWersja: 1.04", Toast.LENGTH_SHORT).show();
+    }
+
 
 
     Handler myHandler = new Handler() {

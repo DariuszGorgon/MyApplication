@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/popup"
+    android:orientation="vertical"
+    >
+
+
+
+    <Button
+        android:layout_margin="20dp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/buttonshape"
+        android:id="@+id/tak"
+        android:onClick="onNieClick"
+        android:text="@string/no"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_margin="20dp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:background="@drawable/buttonshape"
+        android:id="@+id/nie"
+        android:onClick="onTakClick"
+        android:text="@string/yes"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+         />
+
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Would you like to delete all data?"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+       />
+
+</RelativeLayout>

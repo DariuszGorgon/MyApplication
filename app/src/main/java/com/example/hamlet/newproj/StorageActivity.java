@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -19,16 +23,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class StorageActivity extends AppCompatActivity {
-    RecyclerView recyclerview;
+    static RecyclerView recyclerview;
     public static String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WepApp";
-
     static int numberOfPosition = 0;
     static String[] s ;
-    Animation animHide;
+    static Animation animHide;
+    static Animation animHideDeep;
     static Context context;
-    Animation animRotate;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_recycle_view_activity);
@@ -45,13 +52,14 @@ public class StorageActivity extends AppCompatActivity {
         MyAdapter Adapter = new MyAdapter();
         recyclerview.setAdapter(Adapter);
         animHide = AnimationUtils.loadAnimation(this, R.anim.hide);
-        animRotate  = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        animHideDeep = AnimationUtils.loadAnimation(this, R.anim.hidedeep);
+        File fl = new File(path);
+        fl.mkdir();
 
     }
 
     public void onReturnStorageClick(View view) {
         view.startAnimation(animHide);
-        view.startAnimation(animRotate);
         Thread thread1 = new Thread() {
             @Override
             public void run() {
@@ -70,33 +78,29 @@ public class StorageActivity extends AppCompatActivity {
         thread1.start();
 
     }
-
     public void onClearDataClick(View view) {
-        view.startAnimation(animHide);
-        File file = new File(path + "/weather.txt");
-        MyFileClass.ClearFile(file);
-        s= MyFileClass.LoadFile(file);
 
-        numberOfPosition = s.length;
+        startActivity(new Intent(this,Clear.class));
 
-        MyAdapter Adapter = new MyAdapter();
-        recyclerview.setAdapter(Adapter);
+
+    }@Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,WepViewActivity.class);
+        startActivity(intent);
+        finish();
     }
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView SavedData;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             SavedData = (TextView) itemView.findViewById(R.id.seved_data);
-
+        }
     }
-    }
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
     public static class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
-
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -106,13 +110,59 @@ public class StorageActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder,final int position) {
 
            try {
-               holder.SavedData.setText((position+1)+". "+s[position]); ////////////////////////////////
+               holder.SavedData.setText((numberOfPosition-position)+". "+s[numberOfPosition-1-position]); ////////////////////////////////
            }catch (Exception e){
                e.printStackTrace();
            }
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    view.startAnimation(animHideDeep);
+                    List<String> stringList = new ArrayList<String>(Arrays.asList(s));
+                    stringList.remove(numberOfPosition-1-position);
+                    String[] stringArray = stringList.toArray(new String[numberOfPosition-1]);
+                    File file = new File(path + "/weather.txt");
+                    MyFileClass.ClearFile(file);
+                    MyFileClass.SaveFile(file,stringArray);
+                    s= MyFileClass.LoadFile(file);
+                    numberOfPosition = stringArray.length;
+                    Thread thread1 = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+
+                                sleep(400);
+                                Message msg = myHandler.obtainMessage();
+                                myHandler.sendMessageAtFrontOfQueue(msg);
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    thread1.start();
+
+                    return true;
+                }
+            });
+        }
+        Handler myHandler = new Handler() {
+              @Override
+              public void handleMessage(Message msg) {
+                 super.handleMessage(msg);
+                  MyAdapter Adapter = new MyAdapter();
+                  recyclerview.setAdapter(Adapter);
+
+
+                 }
+       };
+
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position);
         }
 
         @Override
