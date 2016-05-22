@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Would you like to delete all data?"
+        android:text="@string/delate_data_ask"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
        />

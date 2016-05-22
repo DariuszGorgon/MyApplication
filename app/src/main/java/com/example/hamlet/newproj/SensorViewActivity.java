@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,44 +22,42 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class WepViewActivity extends AppCompatActivity {
-    static WebView webView;
-    static TextView textViewTemp;
-    static TextView textViewPress;
-    static TextView textViewLight;
-    static TextView textViewHum;
-    static String url;
-    static Thread threads;
-    private static Context context;
-    private boolean isRunning = true;
-    String htmlCode = "";
-    static int light = 0;
-    static int humidity = 0;
-    static double temperature = 0;
-    static double pressure = 0;
+public class SensorViewActivity extends AppCompatActivity {
+    WebView webView;
+    TextView textViewTemp;
+    TextView textViewPress;
+    TextView textViewLight;
+    TextView textViewHum;
+    Thread threads;
+    static Context context;
+    boolean isRunning = true;
+    int light = 0;
+    int humidity = 0;
+    double temperature = 0;
+    double pressure = 0;
     Animation animHide;
     Animation animRotate;
-
     public static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WepApp";
+    //==============================================================================================
 
     public static Context getAppContext() {
-        return WepViewActivity.context;
+        return SensorViewActivity.context;
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.wep_view_activity);
+        setContentView(R.layout.sensor_view_activity);
 
-        WepViewActivity.context = getApplicationContext();
+        SensorViewActivity.context = getApplicationContext();
         webView = (WebView) findViewById(R.id.webView);
         textViewTemp = (TextView) findViewById(R.id.textWiewTemperature);
         textViewPress = (TextView) findViewById(R.id.textWiewPressure);
         textViewLight = (TextView) findViewById(R.id.textWiewLight);
         textViewHum = (TextView) findViewById(R.id.textWiewHumidity);
-        url = ConnectActivity.getUrl();
-        webView.loadUrl(url);
-        threads = new Thread(autoRefresh, "nieWiemPoCoTenArgument");
-        //----nowy folder
+
+        webView.loadUrl(ConnectActivity.getUrl());
+        threads = new Thread(autoRefresh, "xxx");
+        //=================tworzenie/sprawdzanie czy istieje folder do zapisu=======================
         File fl = new File(path);
         fl.mkdir();
         animHide = AnimationUtils.loadAnimation(this, R.anim.hide);
@@ -72,7 +68,7 @@ public class WepViewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        threads = new Thread(autoRefresh, "nieWiemPoCoTenArgument");
+        threads = new Thread(autoRefresh, "xxx");
         threads.start();
         isRunning = true;
     }
@@ -83,14 +79,15 @@ public class WepViewActivity extends AppCompatActivity {
         super.onPause();
         isRunning = false;
 
-    }@Override
+    }
+    //==============================Buttons=========================================================
+    @Override
     public void onBackPressed()
     {
         Intent intent = new Intent(this,ConnectActivity.class);
         startActivity(intent);
         finish();
     }
-
     public void saveButton(View view) {
 
 
@@ -102,8 +99,8 @@ public class WepViewActivity extends AppCompatActivity {
         view.startAnimation(animHide);
         File file = new File(path + "/weather.txt");
         String[] s = new String[1];
-        s[0] = "TEMPERATURE = " + WepViewActivity.temperature  + " °C   HUMIDITY = " + WepViewActivity.humidity + " %   LIGHT = "+
-                WepViewActivity.light+ " lx   PRESSURE = " + WepViewActivity.pressure + " hPa                   "+
+        s[0] = "TEMPERATURE = " + temperature  + " °C   HUMIDITY = " + humidity + " %   LIGHT = "+
+                light+ " lx   PRESSURE = " + pressure + " hPa                   "+
         currentDateandTime+"";
         MyFileClass.AddNewDataToLoadedFile2(file, s[0]);
     }
@@ -115,7 +112,7 @@ public class WepViewActivity extends AppCompatActivity {
                 try {
 
                     sleep(150);
-                    Intent intent = new Intent(WepViewActivity.context, StorageActivity.class);
+                    Intent intent = new Intent(SensorViewActivity.context, StorageActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -126,39 +123,25 @@ public class WepViewActivity extends AppCompatActivity {
         };
         thread1.start();
     }
-
-    public void onClearDataClick1(View view) {
-        view.startAnimation(animHide);
-        File file = new File(path + "/weather.txt");
-        MyFileClass.ClearFile(file);
-    }
-    public void onProgramieClick(MenuItem item) {
-
-        Toast.makeText(this,"Autorzy:Kamil Kolmus,Darek Gorgoń \nWersja: 1.04", Toast.LENGTH_SHORT).show();
-    }
-
-
-
+    //=============================getdatafromSTM32=================================================
     Handler myHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             char[] charTable = new char[25];
-            webView.loadUrl(url);
+            webView.loadUrl(ConnectActivity.getUrl());
+            String htmlCode = "";
             try {
                 htmlCode = webView.getTitle().toString();
-
                 charTable = htmlCode.toCharArray();
                 String tempS;
                 String presS;
                 String humS;
                 String lightS;
-
                 tempS = String.valueOf(charTable, 0, 5);
                 presS = String.valueOf(charTable, 6, 6);
                 lightS = String.valueOf(charTable, 17, 5);
                 humS = String.valueOf(charTable, 13, 3);
-
                 humidity = Integer.parseInt(humS);
                 textViewHum.setText("Humidity = " + humidity + " %");
 
@@ -173,7 +156,6 @@ public class WepViewActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Log.d("LOG_TAG", "Error: " + e.getMessage());
             }
-
 
         }
     };

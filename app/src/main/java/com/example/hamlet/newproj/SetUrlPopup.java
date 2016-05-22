@@ -2,7 +2,6 @@ package com.example.hamlet.newproj;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -14,7 +13,7 @@ import android.widget.EditText;
 /**
  * Created by Kamil on 2016-05-15.
  */
-public class Pop extends Activity {
+public class SetUrlPopup extends Activity {
     public static String newURL;
     SharedPreferences sheredpreferences;
     SharedPreferences.Editor editor;
@@ -24,7 +23,7 @@ public class Pop extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pop_activity);
+        setContentView(R.layout.set_url_popup);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

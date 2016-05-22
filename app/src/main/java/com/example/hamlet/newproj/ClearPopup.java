@@ -1,23 +1,19 @@
 package com.example.hamlet.newproj;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 
 import java.io.File;
 
 /**
  * Created by Kamil on 2016-05-15.
  */
-public class Clear extends Activity {
+public class ClearPopup extends Activity {
 
     Animation animHide;
     public static String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WepApp";
@@ -25,7 +21,7 @@ public class Clear extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.clear_activity);
+        setContentView(R.layout.clear_popup);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;

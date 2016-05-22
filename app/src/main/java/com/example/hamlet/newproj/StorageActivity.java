@@ -6,21 +6,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,35 +25,33 @@ import java.util.List;
 
 public class StorageActivity extends AppCompatActivity {
     static RecyclerView recyclerview;
-    public static String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WepApp";
     static int numberOfPosition = 0;
     static String[] s ;
     static Animation animHide;
     static Animation animHideDeep;
     static Context context;
-
+    //==============================================================================================
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.storage_recycle_view_activity);
 
-        File file = new File(path + "/weather.txt");
-
+        File file = new File(SensorViewActivity.path + "/weather.txt");
         s= MyFileClass.LoadFile(file);
         numberOfPosition = s.length;
 
         context=getApplicationContext();
+
         recyclerview = (RecyclerView) findViewById(R.id.recylerview);
         recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL,false)); // zmieni!1
-
         MyAdapter Adapter = new MyAdapter();
         recyclerview.setAdapter(Adapter);
+
         animHide = AnimationUtils.loadAnimation(this, R.anim.hide);
         animHideDeep = AnimationUtils.loadAnimation(this, R.anim.hidedeep);
-        File fl = new File(path);
-        fl.mkdir();
+
 
     }
-
+    //==============================================================================================
     public void onReturnStorageClick(View view) {
         view.startAnimation(animHide);
         Thread thread1 = new Thread() {
@@ -66,7 +60,7 @@ public class StorageActivity extends AppCompatActivity {
                 try {
 
                     sleep(150);
-                    Intent intent = new Intent(StorageActivity.context, WepViewActivity.class);
+                    Intent intent = new Intent(StorageActivity.context, SensorViewActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -76,17 +70,15 @@ public class StorageActivity extends AppCompatActivity {
             }
         };
         thread1.start();
-
     }
     public void onClearDataClick(View view) {
 
-        startActivity(new Intent(this,Clear.class));
-
+        startActivity(new Intent(this,ClearPopup.class));
 
     }@Override
     public void onBackPressed()
     {
-        Intent intent = new Intent(this,WepViewActivity.class);
+        Intent intent = new Intent(this,SensorViewActivity.class);
         startActivity(intent);
         finish();
     }
@@ -108,15 +100,14 @@ public class StorageActivity extends AppCompatActivity {
             MyViewHolder myViewHolder = new MyViewHolder(view);
             return myViewHolder;
         }
-
         @Override
         public void onBindViewHolder(MyViewHolder holder,final int position) {
-
            try {
-               holder.SavedData.setText((numberOfPosition-position)+". "+s[numberOfPosition-1-position]); ////////////////////////////////
-           }catch (Exception e){
+               holder.SavedData.setText((numberOfPosition-position)+". "+s[numberOfPosition-1-position]);
+           }catch (Exception e) {
                e.printStackTrace();
            }
+            //====================usuwaniePojedyńczegoElementuZPamieci==============================
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
@@ -124,7 +115,7 @@ public class StorageActivity extends AppCompatActivity {
                     List<String> stringList = new ArrayList<String>(Arrays.asList(s));
                     stringList.remove(numberOfPosition-1-position);
                     String[] stringArray = stringList.toArray(new String[numberOfPosition-1]);
-                    File file = new File(path + "/weather.txt");
+                    File file = new File(SensorViewActivity.path + "/weather.txt");
                     MyFileClass.ClearFile(file);
                     MyFileClass.SaveFile(file,stringArray);
                     s= MyFileClass.LoadFile(file);
@@ -133,11 +124,10 @@ public class StorageActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-
+                                /////////opuznienie odswieżania dla celu Animacji/////////////////
                                 sleep(400);
                                 Message msg = myHandler.obtainMessage();
                                 myHandler.sendMessageAtFrontOfQueue(msg);
-
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -154,12 +144,12 @@ public class StorageActivity extends AppCompatActivity {
               public void handleMessage(Message msg) {
                  super.handleMessage(msg);
                   MyAdapter Adapter = new MyAdapter();
-                  recyclerview.setAdapter(Adapter);
+                  StorageActivity.recyclerview.setAdapter(Adapter);
 
 
                  }
        };
-
+    //==============================================================================================
         @Override
         public long getItemId(int position) {
             return super.getItemId(position);

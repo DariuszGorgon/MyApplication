@@ -1,7 +1,5 @@
 package com.example.hamlet.newproj;
 
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +12,7 @@ import java.io.InputStreamReader;
 /**
  * Created by Kamil on 2016-04-12.
  */
+////////////////klasa z metodami do zapisu odczytu i modyfikacji pliku tekstowego//////////////
 public class MyFileClass {
 
     public static void SaveFile(File file, String[] data)
@@ -70,7 +69,6 @@ public class MyFileClass {
         }
         catch (IOException e) {e.printStackTrace();}
         //=====================================================
-
         try
         {
             fis.getChannel().position(0);
@@ -93,51 +91,11 @@ public class MyFileClass {
         return array;
     }
     //=============================================================================================
-    public static void AddNewDataToLoadedFile(File file,String[] data)
-    {
-
-        String[] s ;
-        s=MyFileClass.LoadFile(file);
-        FileOutputStream fos = null;
-        try
-        {
-            fos = new FileOutputStream(file);
-        }
-        catch (FileNotFoundException e) {e.printStackTrace();}
-        try
-        {
-            try
-            {
-                for (int i = 0; i<s.length; i++)
-                {
-                    fos.write(s[i].getBytes());
-                    fos.write("\n".getBytes());
-
-                }
-                for (int i = 0; i<data.length; i++)
-                {
-                    fos.write(data[i].getBytes());
-                    fos.write("\n".getBytes());
-                }
-            }
-            catch (IOException e) {e.printStackTrace();}
-        }
-        finally
-        {
-            try
-            {
-                fos.close();
-            }
-            catch (IOException e) {e.printStackTrace();}
-        }
-
-    }
-    //=============================================================================================
     public static void AddNewDataToLoadedFile2(File file,String data)
     {
         FileWriter fileWriter=null;
         try {
-            fileWriter = new FileWriter(WepViewActivity.path + "/weather.txt",true);
+            fileWriter = new FileWriter(SensorViewActivity.path + "/weather.txt",true);
             fileWriter.write(data);
             fileWriter.write("\n");
 
@@ -170,6 +128,47 @@ public class MyFileClass {
             try
             {
                 fos.write("".getBytes());
+            }
+            catch (IOException e) {e.printStackTrace();}
+        }
+        finally
+        {
+            try
+            {
+                fos.close();
+            }
+            catch (IOException e) {e.printStackTrace();}
+        }
+
+    }
+    //=============================================================================================
+
+    public static void AddNewDataToLoadedFile(File file,String[] data)
+    {
+
+        String[] s ;
+        s=MyFileClass.LoadFile(file);
+        FileOutputStream fos = null;
+        try
+        {
+            fos = new FileOutputStream(file);
+        }
+        catch (FileNotFoundException e) {e.printStackTrace();}
+        try
+        {
+            try
+            {
+                for (int i = 0; i<s.length; i++)
+                {
+                    fos.write(s[i].getBytes());
+                    fos.write("\n".getBytes());
+
+                }
+                for (int i = 0; i<data.length; i++)
+                {
+                    fos.write(data[i].getBytes());
+                    fos.write("\n".getBytes());
+                }
             }
             catch (IOException e) {e.printStackTrace();}
         }

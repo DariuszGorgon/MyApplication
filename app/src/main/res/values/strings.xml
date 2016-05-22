@@ -17,5 +17,6 @@
     <string name="memory">Memory</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="delate_data_ask">Would you like to delete all data?</string>
 
 </resources>

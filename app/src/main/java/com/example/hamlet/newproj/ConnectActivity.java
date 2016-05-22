@@ -5,26 +5,23 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.Toast;
 
 public class ConnectActivity extends AppCompatActivity {
-
-    //dddd
-    public static String url;
+    static String url;
     SharedPreferences sheredpreferences;
     SharedPreferences.Editor editor;
     Animation animRotate;
     Animation animhide;
-    static Thread threads;
-    private static Context context;
+    Thread threads;
+    static Context context;
+    //==============================================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +29,6 @@ public class ConnectActivity extends AppCompatActivity {
 
 
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -44,19 +40,12 @@ public class ConnectActivity extends AppCompatActivity {
         threads = new Thread(startNewActivity, "nieWiemPoCoTenArgument");
 
     }
-
-    public static String getUrl(){
-
-         return url;
-
-    }
-
+    //=================================gotoSensorView===============================================
     public void setURL(View view) {
         view.startAnimation(animhide);
         url=sheredpreferences.getString("Last_URL","http://192.168.4.1/weather");
         threads.start();
     }
-
     private Runnable startNewActivity = new Runnable() {
         @Override
         public void run() {
@@ -64,7 +53,7 @@ public class ConnectActivity extends AppCompatActivity {
                 try {
 
                     Thread.sleep(150);
-                    Intent intent= new Intent(ConnectActivity.context, WepViewActivity.class);
+                    Intent intent= new Intent(ConnectActivity.context, SensorViewActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -76,6 +65,8 @@ public class ConnectActivity extends AppCompatActivity {
             }
 
     };
+    //==============================================================================================
+    //============================================actionBar=========================================
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_action_bar, menu);//podmiana xmp na jave
@@ -85,7 +76,7 @@ public class ConnectActivity extends AppCompatActivity {
     }
 
     public void onPalaczenieClick(MenuItem item) {
-        startActivity(new Intent(this,Pop.class));
+        startActivity(new Intent(this,SetUrlPopup.class));
 
     }
 
@@ -93,5 +84,8 @@ public class ConnectActivity extends AppCompatActivity {
 
         Toast.makeText(this,"Created by: Kamil Kolmus,Darek Gorgoń \nVersion: 1.2", Toast.LENGTH_SHORT).show();
     }
+    //==============================================================================================
+    public static String getUrl(){
+        return url;
+    }
 }
-//shhsh
