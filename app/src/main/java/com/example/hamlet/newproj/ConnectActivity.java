@@ -21,7 +21,6 @@ public class ConnectActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     Animation animhide;
     static Context context;
-
     //==============================================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +57,12 @@ public class ConnectActivity extends AppCompatActivity {
         editor = sheredpreferences.edit();
         context = getApplicationContext();
         animhide = AnimationUtils.loadAnimation(this, R.anim.hide);
+        if (0==sheredpreferences.getInt("First_time_open_api",0)) {
+            startActivity(new Intent(this, NavigationPopup.class));
+            editor.putInt("First_time_open_api",1);
+            editor.commit();
+        }
+
 
     }
     @Override
@@ -67,7 +72,7 @@ public class ConnectActivity extends AppCompatActivity {
     //=================================gotoSensorView===============================================
     public void setURL(View view) {
         view.startAnimation(animhide);
-        url=sheredpreferences.getString("Last_URL","http://192.168.4.1/weather");
+        url=sheredpreferences.getString("Last_URL","http://192.168.4.1");
         new SlideAtivityAsyncTask().execute();
     }
     //==============================================================================================
@@ -110,12 +115,7 @@ public class ConnectActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-
-            Intent intent= new Intent(ConnectActivity.context, SensorViewActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-            finish();
-
+            gotoSensorViewActivity();
         }
     }
     private void gotoSetURLPopup() {
