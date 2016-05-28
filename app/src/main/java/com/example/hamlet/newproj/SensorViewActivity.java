@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,7 +35,6 @@ public class SensorViewActivity extends AppCompatActivity {
     TextView message;
     static Context context;
     static int SessionCounter = 1;
-
     int light = 0;
     int humidity = 0;
     double temperature = 0;
@@ -42,10 +42,9 @@ public class SensorViewActivity extends AppCompatActivity {
     Animation animHide;
     String receiveData = "";
     static MyAsyncTask myAsyncTask;
+    static MyAsyncTask myAsyncTaskBackgroud;
     static boolean CreatedOnce = false;
     public static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WepApp";
-
-
     //==============================================================================================
 
     public static Context getAppContext() {
@@ -62,7 +61,10 @@ public class SensorViewActivity extends AppCompatActivity {
         textViewLight = (TextView) findViewById(R.id.textWiewLight);
         textViewHum = (TextView) findViewById(R.id.textWiewHumidity);
         message = (TextView) findViewById(R.id.message);
+
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.sensor_view_activity_id);
+        myAsyncTask = new MyAsyncTask();
+        myAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
         rl.setOnTouchListener(new OnSwipeTouchListener(SensorViewActivity.this) {
@@ -82,6 +84,9 @@ public class SensorViewActivity extends AppCompatActivity {
             @Override
             public void onSwipeBottom() {
                 moveTaskToBack(true);
+              //NIE NISZCZY my ASSYNCTTASK . PRACA W BACKGROUD!!!!!!!!!!!!!!!
+
+
             }
         });
 
@@ -89,7 +94,15 @@ public class SensorViewActivity extends AppCompatActivity {
         File fl = new File(path);
         fl.mkdir();
         animHide = AnimationUtils.loadAnimation(this, R.anim.hide);
+
+        Animation pulseHideLong,pulseHideDownLong;
+        pulseHideLong = AnimationUtils.loadAnimation(this, R.anim.hide_pulse_after_some_sec);
+        pulseHideDownLong = AnimationUtils.loadAnimation(this, R.anim.hide_down_pulse_after_some_sec);
         if (!CreatedOnce) {
+            ImageView imageView = (ImageView) findViewById(R.id.pulse_image) ;
+            imageView.startAnimation(pulseHideDownLong);
+            TextView textView = (TextView) findViewById(R.id.pulse_text);
+            textView.startAnimation(pulseHideLong);
             startActivity(new Intent(this, TimerPopup.class));
             CreatedOnce = true;
         }
@@ -99,11 +112,6 @@ public class SensorViewActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // gdy zniknie aktivity odpalamy na nowo asynTask z zapamiataną sessionCounter
-        myAsyncTask = new MyAsyncTask();
-        myAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-
     }
 
     @Override
@@ -128,8 +136,6 @@ public class SensorViewActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        myAsyncTask.cancel(true);
-
     }
     //============================================actionBar=========================================
 
@@ -313,6 +319,7 @@ public class SensorViewActivity extends AppCompatActivity {
         Intent intent = new Intent(SensorViewActivity.this, ConnectActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        myAsyncTask.cancel(true);
         finish();
 
     }
@@ -320,6 +327,7 @@ public class SensorViewActivity extends AppCompatActivity {
     private void gotoMemoryActivity() {
         startActivity(new Intent(SensorViewActivity.context, MemoryActivity.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        myAsyncTask.cancel(true);
         finish();
 
 

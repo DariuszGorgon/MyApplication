@@ -47,7 +47,7 @@
         android:textColor="@color/NICEBRO"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SLIDE BETWEEN ACTIVIETES"
+        android:text="SCROLL BETWEEN ACTIVITIES"
         android:id="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -58,7 +58,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HIDE"
+        android:text="RUN IN BACKGROUND"
         android:id="@+id/textView3"
         android:layout_below="@+id/imageView7"
         android:layout_centerHorizontal="true" />
@@ -68,7 +68,7 @@
         android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TRY IT"
+        android:text="SOME ACTION"
         android:id="@+id/textView4"
         android:layout_above="@+id/imageView"
         android:layout_centerHorizontal="true" />

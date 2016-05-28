@@ -8,12 +8,14 @@
     android:id="@+id/sensor_view_activity_id"
     >
 
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:orientation="vertical"
-        android:stretchColumns="0,1">
+        android:stretchColumns="0,1"
+        android:id="@+id/tableLayout">
 
         <TableRow
             android:id="@+id/tableRow1"
@@ -187,4 +189,26 @@
             android:onClick="onMemoryCLICK"
             android:text="@string/memory" />
     </LinearLayout>
+
+    <ImageView
+        android:background="@drawable/expanddown_48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/pulse_image"
+        android:visibility="invisible"
+        android:layout_below="@+id/pulse_text"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/NICEBRO"
+        android:visibility="invisible"
+        android:text="SCROLL DOWN TO RUN IN BACKGROUND"
+        android:id="@+id/pulse_text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
