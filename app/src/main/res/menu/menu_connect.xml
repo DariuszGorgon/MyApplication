@@ -6,6 +6,9 @@
     <item android:title="@string/polaczenie"
         android:id="@+id/title1"
         android:onClick="onPalaczenieClick"/>
+    <item android:title="@string/navigation"
+        android:id="@+id/title2"
+        android:onClick="onNavigationClick"/>
 
 
 </menu>

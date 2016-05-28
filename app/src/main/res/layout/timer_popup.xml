@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_timer"
+    android:orientation="vertical"
+    android:stretchColumns="0,1,2,3,4,5,6"
+    android:layout_margin="5dp"
+    android:padding="10dp"
+
+    android:layout_gravity="center"
+    android:gravity="center"
+    > <TableRow
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    >
+
+
+    <TextView
+        android:textColor="@color/NICEBRO"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="h"
+        android:layout_column="0"
+         />
+    <TextView
+        android:textColor="@color/NICEBRO"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="min"
+        android:layout_column="2"
+         />
+    <TextView
+        android:textColor="@color/NICEBRO"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="s"
+        android:layout_column="4"
+         />
+    <TextView
+        android:textColor="@color/NICEBRO"
+        android:layout_column="6"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ms"/>
+
+</TableRow>
+    <TableRow
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+
+    >
+
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/dodaj"
+
+            android:id="@+id/h_dodaj"
+            android:onClick="OnAddHourClick"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/dodaj"
+
+            android:id="@+id/m_dodaj"
+            android:onClick="OnAddMinClick"
+            android:layout_column="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/dodaj"
+
+            android:onClick="OnAddSecondClick"
+            android:id="@+id/s_dodaj"
+            android:layout_column="4" />
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/dodaj"
+
+            android:onClick="OnAddMiliSecondClick"
+            android:id="@+id/ms_dodaj"
+            android:layout_column="6" />
+    </TableRow>
+    <TableRow
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+
+        <TextView
+            android:textColor="@color/NICEBRO"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:layout_column="0"
+            android:id="@+id/txHout" />
+        <TextView
+            android:textColor="@color/NICEBRO"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=":"
+            android:layout_column="1"/>
+
+
+        <TextView
+            android:textColor="@color/NICEBRO"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:layout_column="2"
+            android:id="@+id/txMin" />
+        <TextView
+            android:textColor="@color/NICEBRO"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=":"
+            android:layout_column="3"/>
+        <TextView
+            android:textColor="@color/NICEBRO"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:layout_column="4"
+            android:id="@+id/txSecond" />
+        <TextView
+            android:textColor="@color/NICEBRO"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=":"
+            android:layout_column="5"/>
+
+
+        <TextView
+            android:textColor="@color/NICEBRO"
+            android:layout_column="6"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="250"
+            android:id="@+id/txMiliSecond" />
+    </TableRow>
+    <TableRow
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/minus"
+
+            android:id="@+id/h_odejmij"
+            android:layout_column="0"
+            android:onClick="OnSubstractHourClick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/minus"
+
+            android:id="@+id/m_odejmij"
+            android:onClick="OnSubstractMinClick"
+            android:layout_column="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/minus"
+
+            android:id="@+id/s_odejmij"
+            android:onClick="OnSubstractSecondClick"
+            android:layout_column="4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            style="?android:attr/buttonStyleInset"
+            android:text="@string/minus"
+
+            android:id="@+id/ms_odejmij"
+            android:onClick="OnSubstractMiliSecondClick"
+            android:layout_column="6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/popup_timer"
+        android:orientation="vertical"
+        android:stretchColumns="1,2"
+
+        android:layout_margin="10dp"
+        ><TableRow
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <CheckBox
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/NICEBRO"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/periodic_recording_enable"
+            android:id="@+id/checkBox"
+            android:textSize="10sp"
+            android:checked="false" />
+
+        <Button
+            android:textSize="12sp"
+            android:layout_column="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="@string/save_period"
+            android:onClick="OnSavePeriodClick"
+            android:id="@+id/save_period_timer" />
+        </TableRow>
+        </TableLayout>
+
+</TableLayout>

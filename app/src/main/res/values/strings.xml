@@ -18,5 +18,16 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="delate_data_ask">Would you like to delete all data?</string>
+    <string name="no_data">NO DATA</string>
+    <string name="temperature">Temperature</string>
+    <string name="error_message">ERROR MESSAGE</string>
+    <string name="timer">TIMER</string>
+    <string name="minus">-</string>
+    <string name="dodaj">+</string>
+    <string name="save_data_to">SAVE DATA TO</string>
+    <string name="save_period">SAVE PERIOD</string>
+    <string name="save_data">SAVE DATA</string>
+    <string name="periodic_recording_enable">Periodic recording ON</string>
+    <string name="navigation">Navigation</string>
 
 </resources>

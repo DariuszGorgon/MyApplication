@@ -25,4 +25,12 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
+    <style name="Theme.D1NoTitleDimNoShadow" parent="android:style/Theme.Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+
+
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 </resources>

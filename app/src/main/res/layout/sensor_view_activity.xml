@@ -5,127 +5,133 @@
     android:layout_height="match_parent"
     android:background="@drawable/lawa_wulkan_2"
     android:orientation="vertical"
+    android:id="@+id/sensor_view_activity_id"
     >
 
-
-    <WebView
-        android:id="@+id/webView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-
-        android:layout_weight="0"
-        android:textColor="@color/colorPrimaryDark"
-
-        android:visibility="invisible"
-
-         />
-    <RelativeLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="70dp"
-        >
+        android:orientation="vertical"
+        android:stretchColumns="0,1">
 
-
-        <ImageView
-
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+            <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="100dp"
+            android:layout_width="50dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_gravity="center"
             android:background="@drawable/temperatura"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:scaleX="0.55"
+            android:scaleY="0.85" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@drawable/barometr"
+                android:scaleX="0.60"
+                android:scaleY="0.60" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginRight="49dp"
-            android:layout_marginEnd="49dp"
-            android:background="@drawable/barometr"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="160dp"
-        >
+        android:layout_marginTop="148dp"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textWiewTemperature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text"
             android:gravity="center"
-            android:hint="Temperature"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:hint="@string/temperature"
+            android:text="@string/no_data"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/NICEBRO" />
+
         <TextView
             android:id="@+id/textWiewPressure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text"
             android:gravity="center"
             android:hint="@string/pressure"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:text="@string/no_data"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/NICEBRO" />
     </LinearLayout>
 
-    <RelativeLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="250dp"
-        >
+        android:orientation="vertical"
+        android:stretchColumns="0,1">
 
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="42dp"
-            android:layout_marginStart="42dp"
-            android:background="@drawable/slonce"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginRight="49dp"
-            android:layout_marginEnd="49dp"
-            android:background="@drawable/woda"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
-    <LinearLayout
-
-            android:layout_width="match_parent"
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="340dp"
-            android:orientation="horizontal"
+            android:gravity="center"
+
+
 
             >
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:background="@drawable/slonce"
+                android:scaleX="0.8"
+
+                android:scaleY="0.8" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:background="@drawable/woda"
+                android:scaleX="0.6"
+
+                android:scaleY="0.75" />
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:orientation="horizontal"
+
+        >
+
         <TextView
             android:id="@+id/textWiewLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text"
             android:gravity="center"
             android:hint="@string/light"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/no_data"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/NICEBRO" />
+
         <TextView
 
             android:id="@+id/textWiewHumidity"
@@ -133,21 +139,31 @@
             android:layout_height="wrap_content"
             android:layout_margin="9dp"
             android:layout_weight="1"
-            android:background="@drawable/edit_text"
             android:gravity="center"
             android:hint="@string/humidity"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/no_data"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/NICEBRO" />
 
-        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="400dp"
+        android:gravity="center"
+        android:text="@string/error_message"
+        android:textColor="@color/NICEBRO" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" >
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/refreshButton"
@@ -160,16 +176,15 @@
             android:background="@drawable/buttonshape"
 
             android:onClick="saveButton"
-            android:text="@string/save"
-            />
+            android:text="@string/save" />
+
         <Button
             android:id="@+id/CheckData"
             android:layout_width="160dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:background="@drawable/buttonshape"
-            android:onClick="onCheckDataCLICK"
-            android:text="@string/memory"
-            />
+            android:onClick="onMemoryCLICK"
+            android:text="@string/memory" />
     </LinearLayout>
 </RelativeLayout>

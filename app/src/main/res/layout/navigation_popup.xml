@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:onClick="OnHideClick">
+
+    <ImageView
+        android:background="@drawable/contractup_48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_marginBottom="65dp"
+        android:layout_above="@+id/imageView6"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+
+        android:background="@drawable/expandleft_48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:layout_above="@+id/imageView7"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp" />
+
+    <ImageView
+        android:background="@drawable/expandright_48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="55dp"
+        android:layout_marginEnd="55dp" />
+
+    <ImageView
+        android:background="@drawable/expanddown_48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView7"
+        android:layout_below="@+id/imageView6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp" />
+
+    <TextView
+        android:textColor="@color/NICEBRO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SLIDE BETWEEN ACTIVIETES"
+        android:id="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+         />
+
+    <TextView
+        android:textColor="@color/NICEBRO"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HIDE"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/imageView7"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:textColor="@color/NICEBRO"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRY IT"
+        android:id="@+id/textView4"
+        android:layout_above="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

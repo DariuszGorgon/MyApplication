@@ -33,15 +33,14 @@ public class ClearPopup extends Activity {
         view.startAnimation(animHide);
         File file = new File(path + "/weather.txt");
         MyFileClass.ClearFile(file);
-        StorageActivity.s= MyFileClass.LoadFile(file);
-        StorageActivity.numberOfPosition = StorageActivity.s.length;
-        StorageActivity.MyAdapter Adapter = new StorageActivity.MyAdapter();
-        StorageActivity.recyclerview.setAdapter(Adapter);
+        com.example.hamlet.newproj.MemoryActivity.s= MyFileClass.LoadFile(file);
+        com.example.hamlet.newproj.MemoryActivity.numberOfPosition = com.example.hamlet.newproj.MemoryActivity.s.length;
+       // MemoryActivity.MyAdapter Adapter = new MemoryActivity.MyAdapter();
+       // com.example.hamlet.newproj.MemoryActivity.recyclerview.setAdapter(Adapter);
         finish();
     }
     public void onNieClick(View view) {
         finish();
 
     }
-    ///hovbh
 }

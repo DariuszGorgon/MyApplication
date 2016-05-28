@@ -9,15 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_margin="5dp"
+
         app:cardElevation="30dp"
 
         android:layout_gravity="center"
         android:foregroundGravity="center_vertical|center_horizontal">
         <LinearLayout
-
+            android:id="@+id/card_view_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <TextView
 
