@@ -58,7 +58,7 @@
         android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RUN IN BACKGROUND"
+        android:text="SOME ACTION TOO"
         android:id="@+id/textView3"
         android:layout_below="@+id/imageView7"
         android:layout_centerHorizontal="true" />

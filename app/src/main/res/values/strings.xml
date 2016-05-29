@@ -29,5 +29,6 @@
     <string name="save_data">SAVE DATA</string>
     <string name="periodic_recording_enable">Periodic recording ON</string>
     <string name="navigation">Navigation</string>
+    <string name="no_connection">NO CONNECTION</string>
 
 </resources>

@@ -242,7 +242,7 @@
             android:textColor="@color/NICEBRO"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/periodic_recording_enable"
+            android:text="CYCLIC DATA STORAGE"
             android:id="@+id/period_save"
 
             android:checked="false" />
@@ -255,20 +255,22 @@
             android:textColor="@color/NICEBRO"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Clear memory"
+            android:text="CLEAR MEMORY"
             android:id="@+id/clr_memory"
 
             android:checked="false" />
 
         <Button
+            android:textColor="@color/colorPrimary"
             android:textSize="11dp"
             android:layout_column="2"
+            android:background="@drawable/buttonshape2"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
-            android:layout_width="match_parent"
+            android:layout_width="85dp"
             android:layout_height="35dp"
-            android:text="  SAVE  "
+            android:text="    SAVE    "
             android:onClick="OnSavePeriodClick"
             android:id="@+id/save_period_timer" />
         </TableRow>

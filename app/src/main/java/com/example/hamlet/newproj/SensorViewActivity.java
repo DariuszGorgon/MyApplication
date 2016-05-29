@@ -178,7 +178,7 @@ public class SensorViewActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.d("getUrlContent", "Error: " + e.toString());
             receiveData = null;
-            message.setText("CONNECTION ERROR");
+            message.setText("NO CONNECTION");
         }
         return receiveData;
 
@@ -204,7 +204,7 @@ public class SensorViewActivity extends AppCompatActivity {
                     while (period > 0 && !TimerPopup.timerChangeFlag) {
                         //kalibracja na OKO :) powinno być 100 - czas potrzebny na wykonanie pętli itp.
                         //do poprawy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        Thread.sleep(92);
+                        Thread.sleep(100);
                         period -= 100;
                     }
                     if (TimerPopup.timerChangeFlag = true)
@@ -252,16 +252,16 @@ public class SensorViewActivity extends AppCompatActivity {
                     textViewPress.setText(pressure + " hPa");
                     if (TimerPopup.isCheckBoxSelected()) {
                         saveNewData();
-                        message.setText("Periodic recording ON\n"+
+                        message.setText("Cyclic data storage ON\n"+
                                 " Number of measurements = " + values[0]+"\nPeriod = " + TimerPopup.getTime());
                     } else {
-                        message.setText("Periodic recording OFF\n" +
+                        message.setText("Cyclic data storage OFF\n" +
                                 " Number of  measurement = " + values[0]+"\nPeriod = " + TimerPopup.getTime());
                     }
 
                 } catch (Exception e) {
                     Log.d("conversion", "Error: " + e.toString() + "x" + receiveData + "x");
-                    message.setText("WRONG DATA");
+                    message.setText("Conversion error");
                 }
 
             }
