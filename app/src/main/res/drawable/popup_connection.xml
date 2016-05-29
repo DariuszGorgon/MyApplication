@@ -1,21 +1,19 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <corners
-        android:radius="10dp"
-        />
+        android:radius="30dp" />
 
     <stroke
-
         android:width="5dp"
         android:color="@android:color/darker_gray" />
     <gradient
         android:angle="45"
         android:centerX="35%"
 
-        android:startColor="#8f0d0d"
-        android:centerColor="#a3a3a3"
+        android:startColor="#9b9050"
+        android:centerColor="#b1afa9"
 
-        android:endColor="#000000"
+        android:endColor="#292929"
         android:type="linear"
         />
 

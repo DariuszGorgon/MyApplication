@@ -55,10 +55,6 @@ public class MemoryActivity extends AppCompatActivity {
             public void onSwipeRight() {
                 gotoSensorViewActivity();
             }
-            @Override
-            public void onSwipeBottom() {
-                moveTaskToBack(true);
-            }
 
             @Override
             public void onSwipeLeft(){
@@ -66,7 +62,6 @@ public class MemoryActivity extends AppCompatActivity {
             }
 
         });
-
 
         animHide = AnimationUtils.loadAnimation(this, R.anim.hide);
         animHideDeep = AnimationUtils.loadAnimation(this, R.anim.hidedeep);
@@ -188,7 +183,9 @@ public class MemoryActivity extends AppCompatActivity {
         public int getItemCount() {
             return numberOfPosition;
         }
-    }//==============================================================================================
+    }
+    //==============================================================================================
+
     private class SlideAtivityAsyncTask extends AsyncTask<Void, Integer, Integer> {
         @Override
         protected Integer doInBackground(Void... params) {
@@ -204,10 +201,7 @@ public class MemoryActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            Intent intent= new Intent(MemoryActivity.this, SensorViewActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-            finish();
+            gotoSensorViewActivity();
         }
     } private void gotoConnectActivity() {
         Intent intent = new Intent(MemoryActivity.this, ConnectActivity.class);
@@ -217,10 +211,9 @@ public class MemoryActivity extends AppCompatActivity {
 
     }
     private void gotoSensorViewActivity() {
-        Intent intent= new Intent(MemoryActivity.context, SensorViewActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
 
     }
 }

@@ -16,7 +16,7 @@ import java.io.File;
 public class ClearPopup extends Activity {
 
     Animation animHide;
-    public static String path = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WepApp";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +31,12 @@ public class ClearPopup extends Activity {
     }
     public void onTakClick(View view) {
         view.startAnimation(animHide);
-        File file = new File(path + "/weather.txt");
+        File file = new File(SensorViewActivity.path + "/weather.txt");
         MyFileClass.ClearFile(file);
         com.example.hamlet.newproj.MemoryActivity.s= MyFileClass.LoadFile(file);
         com.example.hamlet.newproj.MemoryActivity.numberOfPosition = com.example.hamlet.newproj.MemoryActivity.s.length;
-       // MemoryActivity.MyAdapter Adapter = new MemoryActivity.MyAdapter();
-       // com.example.hamlet.newproj.MemoryActivity.recyclerview.setAdapter(Adapter);
+      //  MemoryActivity.MyAdapter Adapter = new MemoryActivity.MyAdapter();
+      //  com.example.hamlet.newproj.MemoryActivity.recyclerview.setAdapter(Adapter);
         finish();
     }
     public void onNieClick(View view) {

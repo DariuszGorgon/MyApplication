@@ -5,9 +5,9 @@
     android:background="@drawable/popup_timer"
     android:orientation="vertical"
     android:stretchColumns="0,1,2,3,4,5,6"
-    android:layout_margin="5dp"
-    android:padding="10dp"
+    android:layout_margin="10dp"
 
+    android:padding="10dp"
     android:layout_gravity="center"
     android:gravity="center"
     > <TableRow
@@ -15,6 +15,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
+
     >
 
 
@@ -220,43 +221,54 @@
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/popup_timer"
+
         android:orientation="vertical"
-        android:stretchColumns="1,2"
+        android:stretchColumns="0,1,2"
 
-        android:layout_margin="10dp"
+
         ><TableRow
-
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
+
 
         >
 
         <CheckBox
+            android:textSize="11dp"
             android:layout_column="0"
             android:layout_gravity="center"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:textColor="@color/NICEBRO"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
             android:text="@string/periodic_recording_enable"
-            android:id="@+id/checkBox"
-            android:textSize="10sp"
+            android:id="@+id/period_save"
+
+            android:checked="false" />
+        <CheckBox
+            android:textSize="11dp"
+            android:layout_column="1"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:textColor="@color/NICEBRO"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Clear memory"
+            android:id="@+id/clr_memory"
+
             android:checked="false" />
 
         <Button
-            android:textSize="12sp"
-            android:layout_column="1"
+            android:textSize="11dp"
+            android:layout_column="2"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="15dp"
             android:layout_gravity="center"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:text="@string/save_period"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="  SAVE  "
             android:onClick="OnSavePeriodClick"
             android:id="@+id/save_period_timer" />
         </TableRow>

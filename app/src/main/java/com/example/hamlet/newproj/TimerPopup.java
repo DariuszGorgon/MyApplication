@@ -2,15 +2,15 @@ package com.example.hamlet.newproj;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.io.File;
 
 /**
  * Created by Kamil on 2016-05-15.
@@ -23,10 +23,11 @@ public class TimerPopup extends Activity {
     static boolean isCheckBoxSelected = false;
     static boolean wasCheckBoxChangedStatus = false;
     static boolean timerChangeFlag = false;
+    static int timerChangeValue = 0;
     static SharedPreferences sheredpreferences;
     SharedPreferences.Editor editor;
     TextView txH, txMin, txSec, txMilSec;
-    CheckBox checkBox;
+    CheckBox periodSave,clearmomory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +39,14 @@ public class TimerPopup extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * .9), (int) (height * .4));
+        getWindow().setLayout(width, (int) (height * 0.38));
 
         txH = (TextView) findViewById(R.id.txHout);
         txMin = (TextView) findViewById(R.id.txMin);
         txSec = (TextView) findViewById(R.id.txSecond);
         txMilSec = (TextView) findViewById(R.id.txMiliSecond);
-        checkBox = (CheckBox) findViewById(R.id.checkBox);
+        periodSave = (CheckBox) findViewById(R.id.period_save);
+        clearmomory = (CheckBox) findViewById(R.id.clr_memory);
 
         sheredpreferences = getSharedPreferences("com.example.hamlet.newproj", Context.MODE_PRIVATE);
         editor = sheredpreferences.edit();
@@ -58,7 +60,7 @@ public class TimerPopup extends Activity {
         txH.setText("" + hour);
         txMilSec.setText("" + milisecond);
 
-        checkBox.setChecked(isCheckBoxSelected);
+        periodSave.setChecked(isCheckBoxSelected);
 
     }
 
@@ -98,8 +100,7 @@ public class TimerPopup extends Activity {
         else {
             milisecond = milisecond - 100;
         }
-
-
+        
         txMilSec.setText("" + milisecond);
 
     }
@@ -145,14 +146,22 @@ public class TimerPopup extends Activity {
     //========================================================
 
     public void OnSavePeriodClick(View view) {
-        if ((milisecond + 1000 * second + 1000 * 60 * min + 1000 * 60 * 60 * hour) >= 300) {
+        int time=milisecond + 1000 * second + 1000 * 60 * min + 1000 * 60 * 60 * hour;
+        if ((time) >= 300) {
             editor.putInt("TimerPopupHour", hour);
             editor.putInt("TimerPopupMinutes", min);
             editor.putInt("TimerPopupSecond", second);
             editor.putInt("TimerPopupMiliSecond", milisecond);
             editor.commit();
-            isCheckBoxSelected = checkBox.isChecked();
-            timerChangeFlag=true;
+            isCheckBoxSelected = periodSave.isChecked();
+            if(timerChangeValue!=time) {
+                timerChangeFlag = true;
+            }
+            if(clearmomory.isChecked()){
+                File file = new File(SensorViewActivity.path + "/weather.txt");
+                MyFileClass.ClearFile(file);
+                SensorViewActivity.SessionCounter=1;
+            }
             finish();
         } else {
             Toast.makeText(this, "Minimalny czas wynosi 300 ms", Toast.LENGTH_LONG).show();
@@ -211,7 +220,11 @@ public class TimerPopup extends Activity {
 
     public static int getTimeInMS() {
         int time = getMilisecond() + 1000 * getSecond() + 1000 * 60 * getMin() + 1000 * 60 * 60 * getHour();
-        if (time < 250) return 250;
+        if (time < 300) {
+            timerChangeValue=300;
+            return 300;
+        }
+        timerChangeValue=time;
         return time;
     }
     public static String getTime() {

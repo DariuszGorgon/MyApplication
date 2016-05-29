@@ -34,7 +34,7 @@ public class SensorViewActivity extends AppCompatActivity {
     TextView textViewHum;
     TextView message;
     static Context context;
-    static int SessionCounter = 1;
+    static int SessionCounter = 0;
     int light = 0;
     int humidity = 0;
     double temperature = 0;
@@ -42,9 +42,8 @@ public class SensorViewActivity extends AppCompatActivity {
     Animation animHide;
     String receiveData = "";
     static MyAsyncTask myAsyncTask;
-    static MyAsyncTask myAsyncTaskBackgroud;
     static boolean CreatedOnce = false;
-    public static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WepApp";
+    public static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyWeatherApp";
     //==============================================================================================
 
     public static Context getAppContext() {
@@ -117,15 +116,7 @@ public class SensorViewActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (TimerPopup.wasCheckBoxChangedStatus()) {
-            SessionCounter = 1;
-            if (TimerPopup.isCheckBoxSelected()) {
-                message.setText("Save ON");
-            } else {
-                message.setText("Save OFF");
-            }
 
-        }
     }
 
     @Override
@@ -177,7 +168,6 @@ public class SensorViewActivity extends AppCompatActivity {
             con.setReadTimeout(500);
             con.setDoOutput(false);
             con.setDoInput(true);
-            // con.setRequestProperty("connection", "close");
             con.setRequestMethod("GET");
             InputStreamReader in = new InputStreamReader(con.getInputStream(), Charset.forName("ISO-8859-2"));
             BufferedReader r = new BufferedReader(in);                         //ISO-8859-2 odbierane z esp-01
@@ -213,6 +203,7 @@ public class SensorViewActivity extends AppCompatActivity {
                     }
                     while (period > 0 && !TimerPopup.timerChangeFlag) {
                         //kalibracja na OKO :) powinno być 100 - czas potrzebny na wykonanie pętli itp.
+                        //do poprawy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         Thread.sleep(92);
                         period -= 100;
                     }
@@ -327,8 +318,7 @@ public class SensorViewActivity extends AppCompatActivity {
     private void gotoMemoryActivity() {
         startActivity(new Intent(SensorViewActivity.context, MemoryActivity.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        myAsyncTask.cancel(true);
-        finish();
+
 
 
     }

@@ -39,7 +39,7 @@ public class ConnectActivity extends AppCompatActivity {
             }
             @Override
             public void onSwipeBottom() {
-                moveTaskToBack(true);
+               gotoNavigationPopup();
             }
             @Override
             public void onSwipeRight() {
